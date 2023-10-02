@@ -73,18 +73,51 @@ def get_article_llm_description(title:str, abstract:str, authors:list, affils:li
     return chain_article.run(article_title=title,article_abstract=abstract,
                            author_list=authors, affiliation_list=affils )
 
+################################################################
 
+#topic_template = """
+#I want you to act as a naming consultant for scientific topics based on keyphrases.
+#
+#Return a brief but detailed description of the scientific topic and applications related to
+#the scientific field desribed by the list of keyphrase. The description should be meaningful to an
+#new intelligence analyst. Highlight typical applications. Highlight any dual use technologies that may be of concern to the United #States
+#Government.
+
+#What is a good summary of the scientific topic related to {topic_phrases}?
+#Provide the summary in about 80 words. 
+#Please end with a complete sentence.
+#"""
+#
+#prompt_topic = PromptTemplate(
+#    input_variables=["topic_phrases"],
+#    template=topic_template,
+#)
+
+#chain_topic= LLMChain(llm=llm, prompt=prompt_topic)
+
+
+
+#def get_topic_llm_description(key_phrases:list):
+#    """
+#    takes in the key_phrases list
+#    and returns the openai returned description.
+#    """
+#    topic_phrases = ", ".join(key_phrases)
+#    return chain_topic.run(topic_phrases=topic_phrases)
+
+
+##########################################################
 
 topic_template = """
 I want you to act as a naming consultant for scientific topics based on keyphrases.
 
 Return a brief but detailed description of the scientific topic and applications related to
-the scientific field desribed by the list of keyphrase. The description should be meaningful to an
+the scientific field desribed by the list of keyphrases. The description should be meaningful to an
 new intelligence analyst. Highlight typical applications. Highlight any dual use technologies that may be of concern to the United States
 Government.
 
 What is a good summary of the scientific topic related to {topic_phrases}?
-Provide the summary in about 80 words. 
+Provide the summary in about 180 words. 
 Please end with a complete sentence.
 """
 
@@ -104,8 +137,6 @@ def get_topic_llm_description(key_phrases:list):
     """
     topic_phrases = ", ".join(key_phrases)
     return chain_topic.run(topic_phrases=topic_phrases)
-
-
 
 
 
@@ -591,6 +622,7 @@ st.download_button(
 
 
 topic_keywords = df_selected_centroid['keywords'].to_list()[0]
+#topic_titles = df_selected_centroid['title'].to_list()
 #st.write(topic_keywords)
 llm_topic_description = get_topic_llm_description(topic_keywords)
 st.write(llm_topic_description)
