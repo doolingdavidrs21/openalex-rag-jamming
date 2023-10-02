@@ -36,14 +36,16 @@ llm = ChatOpenAI(model_name = 'gpt-4', # 'gpt-3.5-turbo', # 'text-davinci-003' ,
 article_template = """
 I want you to act as a scientific consultant to help intelligence 
 analysts understand the if a given paper poses any kind of concern to 
-United States security. The summary from you is based on article title, article abstract, the list
+United States security. 
+Act like a Systems Engineering and Technical Assistance (SETA) consultant. 
+The summary from you is based on article title, article abstract, the list
 of authors, and the list of affiliations. 
 
 Return a brief but detailed description of the scientific topic and applications related to
 the scientific field desribed by the title, abstract, list of authors, and the list
 of author affiliations. The description should be meaningful to an
 new intelligence analyst. Highlight typical applications. Highlight any dual use technologies that may be of concern to the United States
-Government. Speculate like a warmonger.
+Government. 
 
 What is a good summary of the scientific paper with  title {article_title} and abstract {article_abstract}?
 Take into account the list of authors {author_list} and list of affiliations {affiliation_list}. Highlight especially
@@ -110,6 +112,7 @@ def get_article_llm_description(title:str, abstract:str, authors:list, affils:li
 
 topic_template = """
 I want you to act as a naming consultant for scientific topics based on keyphrases.
+Act like a Systems Engineering and Technical Assistance (SETA) consultant. 
 
 Return a brief but detailed description of the scientific topic and applications related to
 the scientific field desribed by the list of keyphrases. The description should be meaningful to an
